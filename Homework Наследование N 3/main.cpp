@@ -27,7 +27,7 @@ protected:
 	int B;
 	int C;
 	std::string check() override {
-		return "Wrong";
+		return "Right";
 	}
 	int amount() override {
 		return 3;
@@ -56,7 +56,7 @@ protected:
 	int C1;
 	int D1;
 	std::string check() override {
-		return "Wrong";
+		return "Right";
 	}
 	int amount() override {
 		return 4;
@@ -77,25 +77,40 @@ public:
 class RectangularTriangle : public Triangle {
 protected:
 	std::string check() override {
-		return "Wrong";
+		if (C == 90) {
+			return "Right";
+		}
+		else {
+			return "Wrong";
+		}
 	}
 public:
-	RectangularTriangle() : Triangle(10, 20, 30, 50, 60, 90, "Rectangular triangle") {}
+	RectangularTriangle() : Triangle(10,20,30,40,50,90, "Rectangular triangle") {}
 };
 
 class IsoscelesTriangle : public Triangle {
 protected:
 	std::string check() override {
-		return "Wrong";
+		if (a == c && A == C) {
+			return "Right";
+		}
+		else {
+			return "Wrong";
+		}
 	}
 public:
-	IsoscelesTriangle() : Triangle(10, 20, 10, 50, 60, 50, "Isosceles triangle") {}
+	IsoscelesTriangle() : Triangle(10, 30, 10, 50, 60, 50, "Isosceles triangle") {}
 };
 
 class EqualateralTriangle : public Triangle {
 protected:
 	std::string check() override {
-		return "Right";
+		if (a == b && a == c && b == c && B == C && A == B && A == C) {
+			return "Right";
+		}
+		else {
+			return "Wrong";
+		}
 	}
 public:
 	EqualateralTriangle() : Triangle(30, 30, 30, 60, 60, 60, "Equalateral triangle") {}
@@ -104,7 +119,12 @@ public:
 class Parallelogram : public Quadrangle {
 protected:
 	std::string check() override {
-		return "Wrong";
+		if (a1 = c1 && b1 == d1 && A1 == C1 && B1 == D1) {
+			return "Right";
+		}
+		else {
+			return "Wrong";
+		}
 	}
 public:
 	Parallelogram() : Quadrangle(20, 30, 20, 30, 30, 40, 30, 40, "Parallelogram") {}
@@ -113,7 +133,12 @@ public:
 class Rectangle : public Quadrangle {
 protected:
 	std::string check() override {
-		return "Wrong";
+		if (a1 == c1 && b1 == d1 && A1 == 90 && B1 == 90 && C1 == 90 && D1 == 90) {
+			return "Right";
+		}
+		else {
+			return "Wrong";
+		}
 	}
 public:
 	Rectangle() : Quadrangle(10, 20, 10, 20, 90, 90, 90, 90, "Rectangle") {}
@@ -122,7 +147,12 @@ public:
 class Rhomb : public Quadrangle {
 protected:
 	std::string check() override {
-		return "Wrong";
+		if (a1 == b1 && a1 == c1 && a1 == d1 && b1 == c1 && b1 == d1 && c1 == d1 && A1 == C1 && B1 == D1) {
+			return "Right";
+		}
+		else {
+			return "Wrong";
+		}
 	}
 public:
 	Rhomb() : Quadrangle(30, 30, 30, 30, 30, 40, 30, 40, "Rhomb") {}
@@ -131,7 +161,12 @@ public:
 class Square : public Quadrangle {
 protected:
 	std::string check() override {
-		return "Right";
+		if (a1 == b1 && a1 == c1 && a1 == d1 && b1 == c1 && b1 == d1 && c1 == d1 && A1 == 90 && B1 == 90 && C1 == 90 && D1 == 90) {
+			return "Right";
+		}
+		else {
+			return "Wrong";
+		}
 	}
 public:
 	Square() : Quadrangle(20, 20, 20, 20, 90, 90, 90, 90, "Square") {}
@@ -151,7 +186,7 @@ int main()
 	Square square;
 	Figure* triangle1 = &triangle;
 	triangle1->print_info();
-	Figure* quadrangle1 = &quadrangle;;
+	Figure* quadrangle1 = &quadrangle;
 	quadrangle1->print_info();
 	Figure* rectangularTriangle1 = &rectangularTriangle;
 	rectangularTriangle1->print_info();
