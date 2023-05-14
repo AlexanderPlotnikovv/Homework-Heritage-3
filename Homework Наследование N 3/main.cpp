@@ -10,8 +10,8 @@ public:
 		return Name;
 	}
 	virtual void print_info() {};
-	virtual std::string check() {
-		return "Right";
+	virtual bool check() {
+		return 1;
 	};
 	virtual int amount() {
 		return 0;
@@ -26,8 +26,15 @@ protected:
 	int A;
 	int B;
 	int C;
-	std::string check() override {
-		return "Right";
+	bool check() override {
+		if (A + B + C == 180)
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
 	}
 	int amount() override {
 		return 3;
@@ -37,7 +44,14 @@ public:
 	Triangle() : Triangle(10, 20, 30, 50, 60, 70, "Triangle") {}
 	void print_info() override {
 		std::cout << Name << ":" << std::endl;
-		std::cout << check() << std::endl;
+		if (check() == true)
+		{
+			std::cout << "Right" << std::endl;
+		}
+		else
+		{
+			std::cout << "Wrong" << std::endl;
+		}
 		std::cout << "Amount of sides: " << amount() << std::endl;
 		std::cout << "Sides: a = " << a << ", b = " << b << ", c = " << c << std::endl;
 		std::cout << "Angles: A = " << A << ", B = " << B << ", C = " << C << std::endl;
@@ -55,18 +69,32 @@ protected:
 	int B1;
 	int C1;
 	int D1;
-	std::string check() override {
-		return "Right";
+	bool check() override {
+		if (A1 + B1 + C1 + D1 == 360)
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
 	}
 	int amount() override {
 		return 4;
 	}
 public:
 	Quadrangle(int a1, int b1, int c1, int d1, int A1, int B1, int C1, int D1, std::string Name) : a1(a1), b1(b1), c1(c1), d1(d1), A1(A1), B1(B1), C1(C1), D1(D1), Figure(Name) {}
-	Quadrangle() : Quadrangle(10, 20, 30, 40, 50, 60, 70, 80, "Quadrangle") {}
+	Quadrangle() : Quadrangle(10, 20, 30, 40, 50, 160, 70, 80, "Quadrangle") {}
 	void print_info() override {
 		std::cout << Name << ":" << std::endl;
-		std::cout << check() << std::endl;
+		if (check() == true)
+		{
+			std::cout << "Right" << std::endl;
+		}
+		else
+		{
+			std::cout << "Wrong" << std::endl;
+		}
 		std::cout << "Amount of sides: " << amount() << std::endl;
 		std::cout << "Sides: a = " << a1 << ", b = " << b1 << ", c = " << c1 << ", d = " << d1 << std::endl;
 		std::cout << "Angles: A = " << A1 << ", B = " << B1 << ", C = " << C1 << ", D = " << D1 << std::endl;
@@ -76,12 +104,21 @@ public:
 
 class RectangularTriangle : public Triangle {
 protected:
-	std::string check() override {
-		if (C == 90) {
-			return "Right";
+	bool check() override {
+		if (Triangle::check() == true)
+		{
+			if (C == 90)
+			{
+				return 1;
+			}
+			else
+			{
+				return 0;
+			}
 		}
-		else {
-			return "Wrong";
+		else
+		{
+			return 0;
 		}
 	}
 public:
@@ -90,26 +127,44 @@ public:
 
 class IsoscelesTriangle : public Triangle {
 protected:
-	std::string check() override {
-		if (a == c && A == C) {
-			return "Right";
+	bool check() override {
+		if (Triangle::check() == true)
+		{
+			if (a == c && A == C)
+			{
+				return 1;
+			}
+			else
+			{
+				return 0;
+			}
 		}
-		else {
-			return "Wrong";
+		else
+		{
+			return 0;
 		}
 	}
 public:
-	IsoscelesTriangle() : Triangle(10, 30, 10, 50, 60, 50, "Isosceles triangle") {}
+	IsoscelesTriangle() : Triangle(10, 30, 10, 50, 80, 50, "Isosceles triangle") {}
 };
 
 class EqualateralTriangle : public Triangle {
 protected:
-	std::string check() override {
-		if (a == b && a == c && b == c && B == C && A == B && A == C) {
-			return "Right";
+	bool check() override {
+		if (Triangle::check() == true)
+		{
+			if (a == b && a == c && b == c && B == C && A == B && A == C)
+			{
+				return 1;
+			}
+			else
+			{
+				return 0;
+			}
 		}
-		else {
-			return "Wrong";
+		else
+		{
+			return 0;
 		}
 	}
 public:
@@ -118,26 +173,44 @@ public:
 
 class Parallelogram : public Quadrangle {
 protected:
-	std::string check() override {
-		if (a1 = c1 && b1 == d1 && A1 == C1 && B1 == D1) {
-			return "Right";
+	bool check() override {
+		if (Quadrangle::check() == true)
+		{
+			if (a1 == c1 && b1 == d1 && A1 == C1 && B1 == D1)
+			{
+				return 1;
+			}
+			else
+			{
+				return 0;
+			}
 		}
-		else {
-			return "Wrong";
+		else
+		{
+			return 0;
 		}
 	}
 public:
-	Parallelogram() : Quadrangle(20, 30, 20, 30, 30, 40, 30, 40, "Parallelogram") {}
+	Parallelogram() : Quadrangle(20, 30, 20, 30, 140, 40, 140, 40, "Parallelogram") {}
 };
 
 class Rectangle : public Quadrangle {
 protected:
-	std::string check() override {
-		if (a1 == c1 && b1 == d1 && A1 == 90 && B1 == 90 && C1 == 90 && D1 == 90) {
-			return "Right";
+	bool check() override {
+		if (Quadrangle::check() == true)
+		{
+			if (a1 == c1 && b1 == d1 && A1 == 90 && B1 == 90 && C1 == 90 && D1 == 90)
+			{
+				return 1;
+			}
+			else
+			{
+				return 0;
+			}
 		}
-		else {
-			return "Wrong";
+		else
+		{
+			return 0;
 		}
 	}
 public:
@@ -146,26 +219,44 @@ public:
 
 class Rhomb : public Quadrangle {
 protected:
-	std::string check() override {
-		if (a1 == b1 && a1 == c1 && a1 == d1 && b1 == c1 && b1 == d1 && c1 == d1 && A1 == C1 && B1 == D1) {
-			return "Right";
+	bool check() override {
+		if (Quadrangle::check() == true)
+		{
+			if (a1 == b1 && a1 == c1 && a1 == d1 && b1 == c1 && b1 == d1 && c1 == d1 && A1 == C1 && B1 == D1)
+			{
+				return 1;
+			}
+			else
+			{
+				return 0;
+			}
 		}
-		else {
-			return "Wrong";
+		else
+		{
+			return 0;
 		}
 	}
 public:
-	Rhomb() : Quadrangle(30, 30, 30, 30, 30, 40, 30, 40, "Rhomb") {}
+	Rhomb() : Quadrangle(30, 30, 30, 30, 30, 150, 30, 150, "Rhomb") {}
 };
 
 class Square : public Quadrangle {
 protected:
-	std::string check() override {
-		if (a1 == b1 && a1 == c1 && a1 == d1 && b1 == c1 && b1 == d1 && c1 == d1 && A1 == 90 && B1 == 90 && C1 == 90 && D1 == 90) {
-			return "Right";
+	bool check() override {
+		if (Quadrangle::check() == true)
+		{
+			if (a1 == b1 && a1 == c1 && a1 == d1 && b1 == c1 && b1 == d1 && c1 == d1 && A1 == 90 && B1 == 90 && C1 == 90 && D1 == 90)
+			{
+				return 1;
+			}
+			else
+			{
+				return 0;
+			}
 		}
-		else {
-			return "Wrong";
+		else
+		{
+			return 0;
 		}
 	}
 public:
